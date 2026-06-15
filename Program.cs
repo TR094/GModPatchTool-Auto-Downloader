@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Threading;
+using System.Security.Principal;
 
 namespace GModPatchToolAutoDownloader
 {
@@ -64,6 +65,19 @@ namespace GModPatchToolAutoDownloader
 
         static void Main(string[] args)
         {
+            if (new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("This program must NOT be run as an administrator. Please restart it without administrator privileges. \n" +
+                    "If possible, launch it through your Downloads folder, rather than straight out of your browser.");
+                Console.ReadLine();
+                System.Environment.Exit(0);
+            }
+            else
+            {
+                Console.ResetColor();
+            }
+
             var down = new Program();
             Directory.CreateDirectory(tempFolder);
 
