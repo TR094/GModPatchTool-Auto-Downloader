@@ -16,9 +16,13 @@ namespace GModPatchToolAutoDownloader
     {
         // URL to the latest version of the Windows release
         public static string websitePath = "https://github.com/solsticegamestudios/GModPatchTool/releases/latest/download/GModPatchTool-Windows.zip";
-        public static string zipPath = @"C:\Users\Eduko\Downloads\tempG\tempGPTAD.zip";
-        public static string tempFolder = @"C:\Users\Eduko\Downloads\tempG\";
-        public static string executablePath = @"C:\Users\Eduko\Downloads\tempG\gmodpatchtool.exe";
+        public static string tempFolder = Path.Combine(
+            Path.GetTempPath(),
+            "GModPatchTool"
+        );
+
+        public static string zipPath = Path.Combine(tempFolder, "tempGPTAD.zip");
+        public static string executablePath = Path.Combine(tempFolder, "gmodpatchtool.exe");
 
 
         public void DownloadURL()
