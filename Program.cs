@@ -18,7 +18,7 @@ namespace GModPatchToolAutoDownloader
         public static string websitePath = "https://github.com/solsticegamestudios/GModPatchTool/releases/latest/download/GModPatchTool-Windows.zip";
         public static string tempFolder = Path.Combine(
             Path.GetTempPath(),
-            "GModPatchTool"
+            "GModPatchToolAutoDownloader"
         );
 
         public static string zipPath = Path.Combine(tempFolder, "tempGPTAD.zip");
