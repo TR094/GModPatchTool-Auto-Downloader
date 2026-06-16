@@ -15,7 +15,6 @@ namespace GModPatchToolAutoDownloader
 {
     internal class Program
     {
-        // URL to the latest version of the Windows release
         public static string websitePath = "https://github.com/solsticegamestudios/GModPatchTool/releases/latest/download/GModPatchTool-Windows.zip";
         public static string tempFolder = Path.Combine(
             Path.GetTempPath(),
