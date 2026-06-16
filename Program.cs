@@ -16,14 +16,9 @@ namespace GModPatchToolAutoDownloader
     internal class Program
     {
         public static string websitePath = "https://github.com/solsticegamestudios/GModPatchTool/releases/latest/download/GModPatchTool-Windows.zip";
-        public static string tempFolder = Path.Combine(
-            Path.GetTempPath(),
-            "GModPatchToolAutoDownloader"
-        );
-
+        public static string tempFolder = Path.Combine(Path.GetTempPath(), "GModPatchToolAutoDownloader");
         public static string zipPath = Path.Combine(tempFolder, "tempGPTAD.zip");
         public static string executablePath = Path.Combine(tempFolder, "gmodpatchtool.exe");
-
 
         public void DownloadURL()
         {
@@ -39,7 +34,6 @@ namespace GModPatchToolAutoDownloader
                 Console.WriteLine("Error. Failed to download the file from the URL");
             }
         }
-
 
         public void ExtractZIP()
         {
@@ -76,7 +70,7 @@ namespace GModPatchToolAutoDownloader
             {
                 Console.ResetColor();
             }
-
+            
             var down = new Program();
             Directory.CreateDirectory(tempFolder);
 
@@ -92,11 +86,8 @@ namespace GModPatchToolAutoDownloader
 
             Console.WriteLine("Deleting temporary folder...");
             Directory.Delete(tempFolder, true);
-
             Console.WriteLine("Done!");
-
             Thread.Sleep(1000);
-
             System.Environment.Exit(0);
 
         }
