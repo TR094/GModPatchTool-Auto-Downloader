@@ -1,15 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using System.Threading;
 using System.Security.Principal;
+using System.Threading;
 
 namespace GModPatchToolAutoDownloader
 {
@@ -31,7 +26,9 @@ namespace GModPatchToolAutoDownloader
             }
             catch (Exception)
             {
-                Console.WriteLine("Error. Failed to download the file from the URL");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("ERROR: Failed to download the file from the URL.");
+                Console.ResetColor();
             }
         }
 
@@ -52,7 +49,9 @@ namespace GModPatchToolAutoDownloader
             }
             catch (Exception)
             {
-                Console.WriteLine("Error. Failed to extract the ZIP");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("ERROR: Failed to extract the ZIP file.");
+                Console.ResetColor();
             }
         }
 
@@ -61,7 +60,7 @@ namespace GModPatchToolAutoDownloader
             if (new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("This program must NOT be run as an administrator. Please restart it without administrator privileges. \n" +
+                Console.WriteLine("ERROR: This program must NOT be run as an administrator. Please restart it without administrator privileges. \n" +
                     "If possible, launch it through your Downloads folder, rather than straight out of your browser.");
                 Console.ReadLine();
                 System.Environment.Exit(0);
@@ -70,23 +69,23 @@ namespace GModPatchToolAutoDownloader
             {
                 Console.ResetColor();
             }
-            
+
             var down = new Program();
             Directory.CreateDirectory(tempFolder);
 
-            Console.WriteLine("Downloading zip file...");
+            Console.WriteLine("INFO: Downloading zip file...");
             down.DownloadURL();
 
-            Console.WriteLine("Extracting zip file...");
+            Console.WriteLine("INFO: Extracting zip file...");
             down.ExtractZIP();
 
-            Console.WriteLine("Executing EXE...");
+            Console.WriteLine("INFO: Executing patcher...");
             var process = Process.Start(executablePath);
             process.WaitForExit();
 
-            Console.WriteLine("Deleting temporary folder...");
+            Console.WriteLine("INFO: Deleting temporary files...");
             Directory.Delete(tempFolder, true);
-            Console.WriteLine("Done!");
+            Console.WriteLine("INFO: Patch complete. Closing...");
             Thread.Sleep(1000);
             System.Environment.Exit(0);
 
